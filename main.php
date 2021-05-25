@@ -1,7 +1,10 @@
 <?php
 class animal{
     public $id;
-    public $temp = 0;
+    static $temp = 0;
+    public function getType(){
+        return static::class;
+    }
 }
 
 class chicken extends animal{
@@ -34,9 +37,20 @@ class Farm{
 $Farm = new Farm();
 $Animals = array();
 for ($i=0; $i<10; $i++){
-    $Animals = $Farm -> createCow();
+    $Animals[] = $Farm -> createCow();
 }
 for ($i=0; $i<20; $i++){
-    $Animals = $Farm -> createChicken();
+    $Animals[] = $Farm -> createChicken();
+}
+$Eggs = 0;
+$Milk = 0;
+$Quantity = count($Animals);
+for ($i=0; $i<30; $i++){
+    if ($Animals[$i] -> getType() == "cow"){
+        echo "cow";
+    }
+    if ($Animals[$i] -> getType() == "chicken"){
+        echo "chik";
+    }
 }
 ?>
