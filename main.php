@@ -47,10 +47,11 @@ $Milk = 0;
 $Quantity = count($Animals);
 for ($i=0; $i<30; $i++){
     if ($Animals[$i] -> getType() == "cow"){
-        echo "cow";
+        $Milk += $Animals[$i] -> collectMilk();
     }
     if ($Animals[$i] -> getType() == "chicken"){
-        echo "chik";
+        $Eggs  += $Animals[$i] -> collectEggs();
     }
 }
+echo "Молока собрано: ".$Milk."л, яиц собрано: ".$Eggs." штук";
 ?>
