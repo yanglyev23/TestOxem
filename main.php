@@ -26,21 +26,21 @@ class cow extends animal{
 }
 
 class Farm{
-    public function createChicken(){
-        return new chicken;
-    }
-    public function createCow(){
-        return new cow;
+    private $Animals = array();
+    private $Eggs = 0;
+    private $Milk = 0;
+    public function createAnimal(animal $animal){
+        $this -> Animals[] = $animal;
     }
 }
 
 $Farm = new Farm();
 $Animals = array();
 for ($i=0; $i<10; $i++){
-    $Animals[] = $Farm -> createCow();
+    $Animals[] = $Farm -> createAnimal(new cow());
 }
 for ($i=0; $i<20; $i++){
-    $Animals[] = $Farm -> createChicken();
+    $Animals[] = $Farm -> createAnimal(new chicken());
 }
 $Eggs = 0;
 $Milk = 0;
