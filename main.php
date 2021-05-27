@@ -11,7 +11,7 @@ class chicken extends animal{
     public function __construct() {
         $this->id=parent::$temp++;
     }
-    public function collectEggs(){
+    public function collectProducts(){
         return rand(0,1);
     }
 }
@@ -20,17 +20,23 @@ class cow extends animal{
     function __construct() {
         $this->id=parent::$temp++;
     }
-    public function collectMilk(){
+    public function collectProducts(){
         return rand(8,12);
     }
 }
 
 class Farm{
-    private $Animals = array();
-    private $Eggs = 0;
-    private $Milk = 0;
-    public function createAnimal(animal $animal){
-        $this -> Animals[] = $animal;
+    public $Animals = array();
+    public function createAnimal(animal $Animal){
+        $this -> Animals[] = $Animal;
+    }
+    public function collect($animalType){
+        foreach ($this->Animals as $Animal){
+            if ($Animal->getType()==$animalType){
+                $Product += $Animal->collectProducts();
+            }
+        }
+        return $Product;
     }
 }
 
@@ -42,16 +48,7 @@ for ($i=0; $i<10; $i++){
 for ($i=0; $i<20; $i++){
     $Animals[] = $Farm -> createAnimal(new chicken());
 }
-$Eggs = 0;
-$Milk = 0;
-$Quantity = count($Animals);
-for ($i=0; $i<30; $i++){
-    if ($Animals[$i] -> getType() == "cow"){
-        $Milk += $Animals[$i] -> collectMilk();
-    }
-    if ($Animals[$i] -> getType() == "chicken"){
-        $Eggs  += $Animals[$i] -> collectEggs();
-    }
-}
+$Milk = $Farm -> collect("cow");
+$Eggs = $Farm -> collect("chicken");
 echo "Молока собрано: ".$Milk."л, яиц собрано: ".$Eggs." штук";
 ?>
